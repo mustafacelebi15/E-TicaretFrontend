@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product';
-import { ProductResponseModel } from '../../models/productResponseModel';
-import { HttpClient } from '@angular/common/http';
+import { ProductService } from '../../services/product.service';
+
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -14,20 +14,17 @@ export class ProductComponent implements OnInit {
 
 
   products:Product[]=[];
-  apiURL="https://localhost:7113/api/Products/getall";
-  productResponseModel:ProductResponseModel={
-    data : this.products,
-    message:"",
-    success:true
-  };
-constructor(private httpClient:HttpClient){}
+  dataLoaded= false;
+
+constructor(private productService:ProductService){}
   ngOnInit(): void {
     this.getProducts();
   }
 
   getProducts(){
-this.httpClient.get<ProductResponseModel>(this.apiURL).subscribe((response) =>{
+this.productService.getProducts().subscribe(response=>{
   this.products = response.data
-});
+  this.dataLoaded=true;
+})
   }
 }
