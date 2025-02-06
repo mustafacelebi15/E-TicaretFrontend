@@ -16,4 +16,5 @@ export class ProductService {
     getProducts(): Observable<ProductResponseModel>{
   return this.httpClient.get<ProductResponseModel>(this.apiURL);
     }
+    //Services
 }

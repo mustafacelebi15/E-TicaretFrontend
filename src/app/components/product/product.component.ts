@@ -20,7 +20,7 @@ constructor(private productService:ProductService){}
   ngOnInit(): void {
     this.getProducts();
   }
-
+//Services
   getProducts(){
 this.productService.getProducts().subscribe(response=>{
   this.products = response.data
